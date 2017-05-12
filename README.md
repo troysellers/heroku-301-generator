@@ -115,5 +115,11 @@ Once it has started up, tail the logs
 Or, have a look at what is being published on the topic. 
 
 ```
-> heroku kafka:topics:tail <<your topic name
+> heroku kafka:topics:tail <<your topic name>>
 ```
+
+Now, if for some reason yours isn't working as described and you really aren't too bothered to debug it.. 
+
+try clicking this button 
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
