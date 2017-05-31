@@ -96,14 +96,15 @@ public class SimpleGenerator {
 	 */
 	private void testForEnvironmentVariables() {
 		
-		Map<String, String> ennvironment = System.getenv();
+		Map<String, String> environment = System.getenv();
 		
-		if(!ennvironment.containsKey("INTERVAL") || 
-				!ennvironment.containsKey("KAFKA_URL") || 
-				!ennvironment.containsKey("KAFKA_CLIENT_CERT") ||
-				!ennvironment.containsKey("KAFKA_CLIENT_CERT_KEY") || 
-				!ennvironment.containsKey("KAFKA_TOPIC") ||
-				!ennvironment.containsKey("KAFKA_TRUSTED_CERT")) {
+		if(!environment.containsKey("INTERVAL") || 
+				!environment.containsKey("KAFKA_URL") || 
+				!environment.containsKey("KAFKA_CLIENT_CERT") ||
+				!environment.containsKey("KAFKA_CLIENT_CERT_KEY") || 
+				!environment.containsKey("KAFKA_TOPIC") ||
+				!environment.containsKey("KAFKA_TRUSTED_CERT") ||
+            !environment.containsKey("KAFKA_PREFIX")) {
 			
 			logger.error("You haven't configured your Kafka Generator environment variables correctly. See the README for full description of required values (most are provisioned by attaching a Kafka addon)");
 			throw new RuntimeException("Environment variables have not been configured correctly... ");
