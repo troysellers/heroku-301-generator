@@ -30,8 +30,9 @@ public class SimpleGenerator {
 	protected Logger logger;
 	protected MessageService messageService;
 	protected Producer<String,String> kafkaProducer;
-	
+	public static String KAFKA_TOPIC; 
 	public static void main (String[] args) {
+      KAFKA_TOPIC = System.getenv("KAFKA_PREFIX") + System.getenv("KAFKA_TOPIC");
 		new SimpleGenerator();
 	}	
 	
