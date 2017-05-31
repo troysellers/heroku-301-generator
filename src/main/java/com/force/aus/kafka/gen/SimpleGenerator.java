@@ -76,7 +76,7 @@ public class SimpleGenerator {
 		public void run() {
 	
 			String message = messageService.getMessageData();
-			ProducerRecord<String, String> producerRecord = new ProducerRecord<String, String>(System.getenv("KAFKA_TOPIC"), message);
+			ProducerRecord<String, String> producerRecord = new ProducerRecord<String, String>(KAFKA_TOPIC, message);
 			
 			// send and process asynchronous
 			kafkaProducer.send(producerRecord, new Callback() {
@@ -97,14 +97,6 @@ public class SimpleGenerator {
 	private void testForEnvironmentVariables() {
 		
 		Map<String, String> environment = System.getenv();
-		
-      logger.info("INTERVAL {}", System.getenv("INTERVAL"));
-      logger.info("KAFKA_URL {}", System.getenv("KAFKA_URL"));
-      logger.info("KAFKA_CLIENT_CERT {}", System.getenv("KAFKA_CLIENT_CERT"));
-      logger.info("KAFKA_CLIENT_CERT_KEY {}", System.getenv("KAFKA_CLIENT_CERT_KEY"));
-      logger.info("KAFKA_TOPIC {}", System.getenv("KAFKA_TOPIC"));
-      logger.info("KAFKA_TRUSTED_CERT {}", System.getenv("KAFKA_TRUSTED_CERT"));
-      logger.info("KAFKA_PREFIX {}", System.getenv("KAFKA_PREFIX"));
 
 		if(!environment.containsKey("INTERVAL") || 
 				!environment.containsKey("KAFKA_URL") || 
