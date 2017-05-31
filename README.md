@@ -55,27 +55,18 @@ Open up Eclipse (or your tool of choice) and look at the Procfile, it should hav
 worker: java -jar target/kafka-gen-jar-with-dependencies.jar
 ```
 
-Now, open your Heroku dashboard and find your application. 
-
-![New App Dash](2-newGenAppDash.png)
-
-This application now has a single worker dyno, but no web dynos and can be considered to be effectively headless. It is fairly simple in that it is going to run and send random information to a Kafka Topic, but first we are going to need some Kafka!
-
-Go to the resources tab and search for the Kafka Add On
-
-![Kafka AddOn](images/3-kafkaAddOn.png)
-
-You will see that the Kafka service starts at $1500 per month, not bad for a fully managed deployment of Kafka. However, seeing as this is just a training day it might be best to use one that I have already created. Thankfully, we can do this using the commandline quite easily.
+Now you need to create a Kafka and add it to your application. This command will use the beta version of the Multi-tennant Kafka service
 
 ```
-> heroku addons:attach <<heroku addon name>>
+> heroku addons:create heroku-kafka:beta-mt-0
 ```
 
-In your data dashboard you can find the instance of Kafka we are all using and go ahead and create your own topic.
+Create a Kafka Topic that you are going to use for this tutorial, I've called mine generator but feel free to name yours something else
+```
+> heroku kafka:topics:create generator
+```
 
-![Create Topic](images/4-createTopic.png)
-
-Now you can see that there has been a few extra configuration variables added to your application, have a look.
+If you look at your configuration variables you will see there have been a few new ones added to your app as a result of adding in Kafka.
 
 ```
 > heroku config
@@ -86,6 +77,7 @@ The application source code will look for the following that have been created a
 - KAFKA_CLIENT_CERT_KEY
 - KAFKA_TRUSTED_CERT
 - KAFKA_URL
+- KAFKA_PREFIX
 
 But we will also need two more
 - KAFKA_TOPC
@@ -94,7 +86,7 @@ But we will also need two more
 go ahead and add them now
 
 ```
-> heroku config:set KAFKA_TOPIC=<<your topic name>>
+> heroku config:set KAFKA_TOPIC=generator
 > heroku config:set INTERVAL=500
 ```
 
