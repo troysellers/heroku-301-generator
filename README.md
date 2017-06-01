@@ -13,7 +13,7 @@ See [Preparing Your Environment](https://devcenter.heroku.com/articles/kafka-on-
 ## Kafka
 The introduction section on the Kafka home does an excellent job of explaining what Kafka is, so I encourage you to head over and have a look. Also, have a look at the Heroku docs that talk about our service as well. 
 
-For the purpose of this exercise today we will use the multi-tennant kafka service. 
+For the purpose of this exercise today we will use the multi-tennant kafka service, currently this service is in beta (unless of course I just haven't updated this README...) 
 
 ## Create a Kafka Producer
 
@@ -25,7 +25,7 @@ This time we are going to run this a little differently, as we have already buil
 ```
 
 This will give us a copy of code locally we can work with and explore. 
-Now, let's get this ready for eclipse and explore the code
+Now, let's get this ready for eclipse and explore the code (or you could just use a text editor or something.. )
 
 ```
 > mvn eclipse:eclipse
@@ -63,8 +63,9 @@ Now you need to create a Kafka and add it to your application. This command will
 
 Create a Kafka Topic that you are going to use for this tutorial, I've called mine generator but feel free to name yours something else
 ```
-> heroku kafka:topics:create generator
+> heroku kafka:topics:create generator --retention-time 86400000
 ```
+The retention time is 24hrs (minimum) in milliseconds.
 
 If you look at your configuration variables you will see there have been a few new ones added to your app as a result of adding in Kafka.
 
